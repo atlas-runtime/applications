@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+#!/usr/bin/env node 
 
 var pkg = require("./package.json");
 var fs = require("fs");
@@ -52,7 +52,7 @@ if (require.main !== module) {
 }
 
 const conf = {
-  inputString: true,
+  inputString: false,
   depth: 3,
   analysis: path.join(__dirname, './src/analyses/rwx.js'),
   context: {
@@ -71,7 +71,7 @@ const conf = {
   },
   fields: {
     include: false,
-    excludes: ['Promise', 'toString', 'escape', 'setImmediate'],
+    excludes: ['Buffer','Array','Object', 'URL','Error', 'undefined'],
   },
 };
 
