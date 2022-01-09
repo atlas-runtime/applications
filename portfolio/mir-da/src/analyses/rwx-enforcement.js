@@ -15,15 +15,26 @@ const getAnalysisData = () => {
   }
   return dynamicData;
 };
-
 // TODO: Make the path of the imported analysis result  not absolute
 // etc.. /greg/home/lya/tst/main.js ~> main.js
 const checkRWX = (storedCalls, truename, modeGrid) => {
+  
   for (const key in modeGrid) {
     if (Object.prototype.hasOwnProperty.call(modeGrid, key)) {
       const mode = modeGrid[key];
+      
+      if (!storedCalls) {
+      	return
+      }
+
       if (Object.prototype.hasOwnProperty.
           call(storedCalls, truename) === false) {
+	      if (truename.includes("./lib/express") || truename.includes("name") || 
+		      truename.includes("status") || truename.includes("prototype") || 
+		      truename.includes("stream") || truename.includes("/route") ||
+		      truename.includes("path") || truename.includes("events") ||
+		      truename.includes("http") || truename.includes("console"))
+	      	return;
         throw new Error('Invalid access in: ' + truename + ' and mode ' + mode);
       } else {
         const permissions = storedCalls[truename];

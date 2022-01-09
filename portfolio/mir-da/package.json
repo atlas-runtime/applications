@@ -1,15 +1,36 @@
 {
-  "name": "@andromeda/mir-da",
-  "version": "0.0.12",
-  "description": "Dynamic Security Analysis",
-  "main": "src/core.js",
+  "_from": "@andromeda/mir-da",
+  "_id": "@andromeda/mir-da@0.0.12",
+  "_inBundle": false,
+  "_integrity": "sha512-JBp4/SsU8x+v+Mcfw0wY9zG2tyQ1oBO0kmfLIFqb7hYtvMf3G6HRrwuGXPT8boaNEk1/EoQN6PG3Zl/s/1PXlQ==",
+  "_location": "/@andromeda/mir-da",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "@andromeda/mir-da",
+    "name": "@andromeda/mir-da",
+    "escapedName": "@andromeda%2fmir-da",
+    "scope": "@andromeda",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/@andromeda/mir-da/-/mir-da-0.0.12.tgz",
+  "_shasum": "406819d5714cfe0040568f556dcc9edd41b5ff7b",
+  "_spec": "@andromeda/mir-da",
+  "_where": "/home/gntousakis/lya-mir-problems/engineering/packages/neornd/src",
   "bin": {
-    "mir-da": "./index.js"
+    "mir-da": "index.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/andromeda/mir-da.git"
+  "bugs": {
+    "url": "https://github.com/andromeda/mir-da/issues"
   },
+  "bundleDependencies": false,
   "contributors": [
     {
       "name": "Nikos Vasilakis",
@@ -22,6 +43,12 @@
       "url": "http://ntousakis.com"
     }
   ],
+  "dependencies": {
+    "@andromeda/lya": "0.0.18",
+    "@andromeda/mir-sa": "0.0.3"
+  },
+  "deprecated": false,
+  "description": "Dynamic Security Analysis",
   "files": [
     "README.md",
     "index.js",
@@ -31,12 +58,12 @@
     "src/analyses/rwx-performance.js",
     "src/analyses/star-check.js"
   ],
-  "bugs": {
-    "url": "https://github.com/andromeda/mir-da/issues"
-  },
   "homepage": "https://github.com/andromeda/mir-da",
-  "dependencies": {
-    "@andromeda/lya": "0.0.18",
-    "@andromeda/mir-sa": "0.0.3"
-  }
+  "main": "src/core.js",
+  "name": "@andromeda/mir-da",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andromeda/mir-da.git"
+  },
+  "version": "0.0.12"
 }
