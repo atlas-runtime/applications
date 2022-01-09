@@ -1,5 +1,5 @@
 {
-	"log": true,
+	"log": false,
 	"port": 3000,
 	"url": "/",
 	"ssl": {
@@ -8,7 +8,7 @@
 		"cert": "/path/to/your/ssl.crt"	
 	},
         "readline": {
-        	"use": true,
+        	"use": false,
 		"prompt": "[--:--:--][CONSOLE] "
         }
 }
