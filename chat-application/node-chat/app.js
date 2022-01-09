@@ -1,23 +1,24 @@
 /* Requires */
-var favicon = require('serve-favicon');
-var s = require('underscore.string');
-var readline = require('readline');
+//var favicon = require('serve-favicon');
+//var s = require('underscore.string');
 var express = require('express');
 var sockjs = require('sockjs');
 var https = require('https');
-var chalk = require('chalk');
+//var chalk = require('chalk');
 var fs = require('fs');
-
-var log = require('./lib/log.js');
+var Serve_static = require('serve-static')
+var serve_static = Serve_static.serveStatic
+//var log = require('./lib/log.js');
 var utils = require('./lib/utils.js');
 var config = require('./config.json');
 var pack = require('./package.json');
 var path = require('path');
-
+let log = console.log
 
 /* Config */
 var port = utils.normalizePort(process.env.PORT || config.port);
-var app = express();
+var app = express;
+app = app.createApplication();
 var server;
 
 
@@ -35,23 +36,17 @@ var uid = 1;
 
 var alphanumeric = /^\w+$/;
 
-if(config.readline.use) {
-    var rl = readline.createInterface(process.stdin, process.stdout);
-    rl.setPrompt(config.readline.prompt);
-    rl.prompt();
-}
-
-
 /* Express */
+//app.engine('html', es6Renderer);
+app.set('view engine', 'ejs');
 app.set('port', port);
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
-app.use(favicon(path.join(__dirname,'public/img/favicon.png')));
+//app.use(favicon(path.join(__dirname,'public/img/favicon.png')));
 app.locals.version = pack.version;
 
 
 /* Routes */
-app.use(config.url, express.static(path.join(__dirname, 'public')));
+app.use(config.url, serve_static(path.join(__dirname, 'public')));
 app.get(config.url, function (req, res) {
     res.render('index', {version:pack.version});
 });
@@ -59,7 +54,7 @@ app.get(config.url, function (req, res) {
 
 /* Logic */
 chat.on('connection', function(conn) {
-    log('socket', chalk.underline(conn.id) + ': connected (' + conn.headers['x-forwarded-for'] + ')');
+    log('socket', conn.id + ': connected (' + conn.headers['x-forwarded-for'] + ')');
     rateLimit[conn.id] = 1;
     lastTime[conn.id] = Date.now();
     currentTime[conn.id] = Date.now();
@@ -94,6 +89,7 @@ chat.on('connection', function(conn) {
     conn.write(JSON.stringify({type:'server', info:'clients', clients:users}));
     conn.write(JSON.stringify({type:'server', info:'user', client:users[uid]}));
     conn.on('data', function(message) {
+        console.log(message)
         currentTime[conn.id] = Date.now();
         rateInterval[conn.id] = (currentTime[conn.id] - lastTime[conn.id]) / 1000;
         lastTime[conn.id] = currentTime[conn.id];
@@ -139,8 +135,8 @@ chat.on('connection', function(conn) {
                     message = JSON.stringify(data);
                 }
 
-                if(data.type == 'pm') log('message', chalk.underline(clients[conn.id].un) + ' to ' + chalk.underline(data.extra) + ': ' + data.message);
-                else log('message', '[' + data.type.charAt(0).toUpperCase() + data.type.substring(1) + '] ' + chalk.underline(clients[conn.id].un) + ': ' + data.message);
+                if(data.type == 'pm') log('message', clients[conn.id].un + ' to ' + data.extra + ': ' + data.message);
+                else log('message', '[' + data.type.charAt(0).toUpperCase() + data.type.substring(1) + '] ' + clients[conn.id].un + ': ' + data.message);
 
                 handleSocket(clients[conn.id], message);
             } catch(err) {
@@ -152,7 +148,7 @@ chat.on('connection', function(conn) {
     });
 
     conn.on('close', function() {
-        log('socket', chalk.underline(conn.id) + ': disconnected (' + clients[conn.id].ip + ')');
+        log('socket', conn.id + ': disconnected (' + clients[conn.id].ip + ')');
         utils.sendToAll(clients, {type:'typing', typing:false, user:clients[conn.id].un});
         utils.sendToAll(clients, {type:'server', info:'disconnection', user:users[clients[conn.id].id]});
         delete users[clients[conn.id].id];
@@ -200,8 +196,8 @@ function handleSocket(user, message) {
 
     data.id = user.id;
     data.user = user.un;
-    data.type = s.escapeHTML(data.type);
-    data.message = s.escapeHTML(data.message);
+    data.type = data.type
+    data.message = data.message
     data.mid = (Math.random() + 1).toString(36).substr(2, 5);
 
     switch(data.type) {
@@ -353,8 +349,6 @@ if(!config.ssl.use) {
 } else {
     var https = require('https');
     var opt = {
-        key: fs.readFileSync(config.ssl.key),
-        cert: fs.readFileSync(config.ssl.cert)
     };
 
     server = https.createServer(opt, app);
@@ -392,5 +386,4 @@ function onListening() {
     var bind = typeof addr === 'string' ? 'pipe ' + addr : 'port ' + addr.port;
     log('start', 'Listening at ' + bind);
 }
-
 chat.installHandlers(server, {prefix:'/socket', log:function(){}});

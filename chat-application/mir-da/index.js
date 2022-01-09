@@ -52,11 +52,11 @@ if (require.main !== module) {
 }
 
 const conf = {
-  inputString: true,
+  inputString: false,
   depth: 3,
   analysis: path.join(__dirname, './src/analyses/rwx.js'),
   context: {
-    enableWith: true,
+    enableWith: false,
     include: [
       'user-globals',
       'es-globals',
@@ -67,11 +67,11 @@ const conf = {
   },
   modules: {
     include: null,
-    excludes: null,
+    excludes: [],
   },
   fields: {
     include: false,
-    excludes: ['Promise', 'toString', 'escape', 'setImmediate'],
+    excludes: ['Array', 'Buffer', 'Object', 'Promise', 'toString', 'escape', 'setImmediate', 'undefined', 'Error', 'Date'],
   },
 };
 
