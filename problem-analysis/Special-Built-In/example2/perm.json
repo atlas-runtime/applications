@@ -1,0 +1,8 @@
+{
+  "/home/gntousakis/applications/problem-analysis/Special-Built-In/example2/problem.js": {
+    "Object": "r",
+    "Object.assign": "rx",
+    "TypeError": "rx",
+    "undefined": "r"
+  }
+}
