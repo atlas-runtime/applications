@@ -1,0 +1,6 @@
+executing Knn using 1 workers , Wed Oct 20 22:21:19 BST 2021
+Knn: #Battery Diff: 91.00000000000004->90.66666666666667:0.33333333333337123
+executing Knn using 2 workers , Wed Oct 20 22:35:59 BST 2021
+Knn: #Battery Diff: 90.50000000000003->90.33333333333337:0.1666666666666572
+executing Knn using 4 workers , Wed Oct 20 22:43:16 BST 2021
+Knn: #Battery Diff: 90.33333333333337->90.33333333333337:0

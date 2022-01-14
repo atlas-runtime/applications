@@ -1,0 +1,64 @@
+#set terminal postscript enhanced eps defaultplex \
+#    leveldefault color dashed dashlength 2.0 liazureidth 1 \
+#    "Helvetica" 22
+#set out 'signal.pdf'
+#set terminal postscript enhanced eps defaultplex \
+#	leveldefault color dashed dashlength 2.0 linewidth 1 \
+#	"Helvetica" 22
+set terminal pdf size 5,4
+set output 'eval.pdf'
+
+set size 1,0.7
+set style fill solid border -1
+set grid ytics lc rgb '#B8B8B8' lt 0 lw 4 
+# align plots
+set lmargin at screen 0.15
+set rmargin  5
+set tmargin 4
+# ----------------------------------- plot 1 ----------------------------------- 
+#set boxwidth 0.8 absolute
+#set ytics font ", 8"
+#set xtics font ", 8"
+#set ylabel font ", 9"
+#set label "Decision-Tree Learning" at graph 0.3, graph 0.9 font "Helvetica,15"
+#
+#set ytics offset screen 0.08, 0
+#set yrange[0:7]
+#set ytics 1,1,6
+#unset key
+##set title 'Throughput (Ingress Load)'
+##set ylabel "Ingress throughput\n(Requests / second)"
+#unset xtics
+#unset format x
+#plot "run_1" index 0 using 1:(1/($5/1000)) title "Ingress throughput" with lp pt 0
+#unset label
+
+
+
+
+
+
+
+
+set key font ",8" 
+unset format y
+set ytics offset screen 0.1, 0
+set key top right
+set xtics font ", 8"
+set xtics nomirror
+#set xrange [0:40000]
+set yrange [87:103]
+set ytics 88,2,100
+set xtics auto
+set ylabel "Battery Status \n(%)" offset 3.5, 0, 0
+#set title 'Response (Azure Cloud)'
+set xlabel 'Wall clock time (second)' 
+set xtics nomirror rotate by -20 left offset 1.25,0,0
+set label 1 "0.3% Battery Drop" at (10290.289 - 432.851)/2,100 font ",8"
+set arrow from 432.851,100-0.33333333330000414 to 11290.289,100-0.33333333330000414 nohead lc rgb "red"  linewidth 1 lt 7 dt 2
+
+plot 'run_0local' u       6:($13 + 35.3333333333)  title "Decision Tree Learning" pt 4 ps 0.2 with lines ,\
+         'run_1' u        6:($13 + 28.6666666667)  title "Atlas-power Decision Tree Learning" pt 17 ps 0.4 with lines#,\
+#         'run_2' u        6:($13 + 29)  title "Atlas-static (2x)" pt 17 ps 0.4 with lines,\
+#         'run_4' u        6:($13 + 29.3333333333)  title "Atlas-static (4x)" pt 18 ps 0.4 with lines #,\
+#         'run_4scaling' u 1:12  title "Atlas-dynamic (4x)" pt 7 ps 0.3

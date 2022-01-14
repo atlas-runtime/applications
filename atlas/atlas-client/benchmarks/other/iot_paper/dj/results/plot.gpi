@@ -1,0 +1,62 @@
+#set terminal postscript enhanced eps defaultplex \
+#    leveldefault color dashed dashlength 2.0 liazureidth 1 \
+#    "Helvetica" 22
+#set out 'signal.pdf'
+#set terminal postscript enhanced eps defaultplex \
+#	leveldefault color dashed dashlength 2.0 linewidth 1 \
+#	"Helvetica" 22
+set terminal pdf size 5,4
+set output 'eval.pdf'
+
+set size 1,0.7
+set style fill solid border -1
+set grid ytics lc rgb '#B8B8B8' lt 0 lw 4 
+# align plots
+set lmargin at screen 0.15
+set rmargin  5
+set tmargin 4
+## ----------------------------------- plot 1 ----------------------------------- 
+#set boxwidth 0.8 absolute
+#set ytics font ", 8"
+#set xtics font ", 8"
+##set ylabel font ", 9"
+##set key horizontal 
+##set key horizontal font "Helvetica, 20"  #maxrows 1
+#set ytics offset screen 0.09, 0
+#set key font ",8" 
+#set yrange[0:7]
+#set ytics 1,1,6
+##set title 'Throughput (Ingress Load)'
+##set title 'Throughput (Ingress Load)'
+##set ylabel "Ingress throughput\n(Mb / second)"
+#unset xtics
+#unset format x
+#
+#unset key
+#set label "Unweighted Shortest-Path" at graph 0.25, graph 0.9 font "Helvetica,15"
+#plot "run_1" index 0 using 1:(1/($5/1000)) title "Ingress throughput" with lp pt 0
+#unset label
+##set ylabel 'ylabel' offset 0,0
+
+
+
+set key font ",8" 
+unset format y
+set ytics offset screen 0.1, 0
+set key top right
+set xtics font ", 8"
+set xtics nomirror
+#set xrange [0:40000]
+set yrange [80.5:106]
+set ytics 80,4,100
+set xtics auto
+set ylabel "Battery Status \n(%)" offset 3.5, 0, 0
+#set title 'Response (Azure Cloud)'
+set xlabel 'Wall clock time (second)' 
+set xtics nomirror rotate by -20 left offset 1.25,0,0
+set label 1 "0.16% Battery Drop" at (20000 - 4000)/2,101 font ",8"
+set arrow from 710,100 to 20000,100 nohead lc rgb "red"  linewidth 1 lt 7 dt 2
+plot 'run_0local' u       6:($12 + 50.5) title "Unweighted Shortest-Path" pt 4 ps 0.2 with lines ,\
+         'run_1' u        6:($12 + 10.8333333333) title "Atlas-powered Unweighted Shortest-Path" pt 17 ps 0.4 with lines#,\
+#'run_2' u        6:($12 + 11) title "Atlas-static (2x)" pt 17 ps 0.4 with lines,\
+#'run_4' u        6:($12 + 11)  title "Atlas-static (4x)" pt 18 ps 0.4 with lines #,\

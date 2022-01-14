@@ -1,0 +1,59 @@
+#set terminal postscript enhanced eps defaultplex \
+#    leveldefault color dashed dashlength 2.0 liazureidth 1 \
+#    "Helvetica" 22
+#set out 'signal.pdf'
+#set terminal postscript enhanced eps defaultplex \
+#	leveldefault color dashed dashlength 2.0 linewidth 1 \
+#	"Helvetica" 22
+set terminal pdf size 5,4
+set output 'eval.pdf'
+
+set size 1,0.7
+set style fill solid border -1
+set grid ytics lc rgb '#B8B8B8' lt 0 lw 4 
+# align plots
+set lmargin at screen 0.15
+set rmargin  5
+set tmargin 4
+# ----------------------------------- plot 1 ----------------------------------- 
+#set boxwidth 0.8 absolute
+#set yrange[0:24] 
+#set ytics 4, 4, 22 nomirror
+#set ytics font ", 8"
+#set xtics font ", 8"
+#
+##set key horizontal 
+##set key horizontal font "Helvetica, 20"  #maxrows 1
+#set label "Encrypt + Sign" at graph 0.4, graph 0.95
+#
+#set ytics offset screen 0.09, 0
+##set xlabel ' ' 
+#unset key
+##set title 'Throughput (Ingress Load)'
+#unset xtics
+#unset format x
+##set ylabel "Ingress throughput\n(contacts / second)" offset 1.2,0,0 
+#set ylabel "Ingress throughput\n(Requests / second)" offset 1.5,0,0
+#plot "run_1" index 0 using 1:($4/1024/1024 * 8/ ($5/1000)) title "sign + encrypt" with lp pt 0
+#unset label
+set key font ",8" 
+unset format y
+set key top right
+set xtics font ", 8"
+set xtics nomirror rotate by -20 left offset 1.25,0,0
+set yrange [90:102]
+set ytics 92,2,100
+set ytics offset screen 0.1, 0
+set ylabel "Battery Status \n(%)" offset 3.5, 0, 0
+set xlabel 'Wall clock time (second)' 
+set tics nomirror
+# the state of battery is 84.1666666667
+# so to calculate from 100, we do 100 - 84.1666666667
+set label 1 "0.83% Battery Drop" at (4000 - 561)/2,100 font ",8"
+set arrow from 561.048,99.17 to 4000,99.17 nohead lc rgb "red"  linewidth 1 lt 7 dt 2
+# we apply the same process to the rest of the files
+plot 'run_0local' u       6:(15.833333333 + $13)  title "Crypto" pt 4 ps 0.2 with lines ,\
+         'run_1' u        6:(24.666666667 + $13)  title "Atlas-powered Crypto" pt 17 ps 0.4 with lines#,\
+#         'run_2' u        6:(25.333333333 + $13)  title "Atlas-static (2x)" pt 17 ps 0.4 with lines,\
+#         'run_4' u        6:(25.666666667 + $13)  title "Atlas-static (4x)" pt 18 ps 0.4 with lines #,\
+#         'run_4scaling' u 1:12  title "Atlas-dynamic (4x)" pt 7 ps 0.3

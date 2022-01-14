@@ -1,0 +1,12 @@
+#Start  Battery:96.46617
+#Start  Duration          Latency  Bytes   Interval  End    Mode    Thread_ID  Type  Function                 Request_ID  Battery_Status
+0.795   0.678             0.874    209318  1         1.67   remote  0          exec  benchmarks.encrypt_sign  0           96.4639
+0.812   0.609             1.633    131322  1         2.445  remote  0          exec  benchmarks.encrypt_sign  1           96.47649
+0.83    0.643             2.416    131322  1         3.246  remote  0          exec  benchmarks.encrypt_sign  2           96.48355
+0.837   0.631             3.216    131322  1         4.053  remote  0          exec  benchmarks.encrypt_sign  3           96.483574
+0.85    0.627             3.976    131322  1         4.826  remote  0          exec  benchmarks.encrypt_sign  4           96.47176
+0.86    0.652             4.771    131322  1         5.631  remote  0          exec  benchmarks.encrypt_sign  5           96.454834
+0.88    0.634             5.549    131322  1         6.429  remote  0          exec  benchmarks.encrypt_sign  6           96.45561
+0.887   0.646             6.339    131322  1         7.226  remote  0          exec  benchmarks.encrypt_sign  7           96.46071
+0.9     0.72              7.206    131322  1         8.106  remote  0          exec  benchmarks.encrypt_sign  8           96.47961
+0.919   0.628             7.966    131322  1         8.885  remote  0          exec  benchmarks.encrypt_sign  9           96.48076
