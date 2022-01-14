@@ -1,0 +1,63 @@
+{
+  "_from": "@andromeda/mir-sa",
+  "_id": "@andromeda/mir-sa@0.0.3",
+  "_inBundle": false,
+  "_integrity": "sha512-hBHhn5dVrGWA73E+vm6pJypb2iD8gzUMxYpauihLxTW5cqMK6fatDjLxuKgFtKr4n8dmPn1+BDEwRJl6ncuAWQ==",
+  "_location": "/@andromeda/mir-sa",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "@andromeda/mir-sa",
+    "name": "@andromeda/mir-sa",
+    "escapedName": "@andromeda%2fmir-sa",
+    "scope": "@andromeda",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/@andromeda/mir-sa/-/mir-sa-0.0.3.tgz",
+  "_shasum": "5338cd6e195d8eaf6bdcd9ce4d67c128b68faf09",
+  "_spec": "@andromeda/mir-sa",
+  "_where": "/home/dkarnikis/applications",
+  "bin": {
+    "mir-sa": "index.js"
+  },
+  "bugs": {
+    "url": "https://github.com/andromeda/mir/issues"
+  },
+  "bundleDependencies": false,
+  "contributors": [
+    {
+      "name": "Cristian Alexandru Staicu",
+      "email": "cris.staicu@gmail.com"
+    },
+    {
+      "name": "Nikos Vasilakis",
+      "email": "nikos@vasilak.is",
+      "url": "http://nikos.vasilak.is"
+    }
+  ],
+  "dependencies": {
+    "arg": "^4.1.3"
+  },
+  "deprecated": false,
+  "description": "Static Security Analysis",
+  "files": [
+    "README.md",
+    "deps/mir-sa.jar",
+    "index.js"
+  ],
+  "homepage": "https://github.com/andromeda/mir",
+  "main": "index.js",
+  "name": "@andromeda/mir-sa",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andromeda/mir.git"
+  },
+  "version": "0.0.3"
+}
