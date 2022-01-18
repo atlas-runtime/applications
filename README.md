@@ -19,9 +19,7 @@ cd ~/applications/chat-application/node-chat
 # run the chat app, this will listen on port 3300
 node app.js
 ```
-
-* TODO: Link to the chat app
-
+App link: pac-n1.csail.mit.edu:3300
 
 ```sh
 # extract the static permissions — from modules and everywhere
@@ -223,7 +221,8 @@ bash ~/.get_battery.sh
 
 # Disable charging:
 echo "set_allow_charging false" | nc -q 0 127.0.0.1 8423
-# TODO little loop script for using battery (to show consumption)
+# little loop script for using battery (to show consumption)
+bash ~/loop-script.sh
 
 # Enter the atlas demo folder
 cd atlas-demo/atlas-client
@@ -237,19 +236,21 @@ cat benchmarks/crypto_benchmark/crypto-wrapper.js
 # rm -f .tmp
 # fallocate -l 1048576 .tmp
 # 1MB is sorta limited by SGX memory, and would involve thrashing
-cat .tmp | sed 's/\x0/a/g' > input
+# cat .tmp | sed 's/\x0/a/g' > input
 # should show 1MB
-wc -c input
+# wc -c input
 
 # Execute atlas using local mode
 # The output will be written to the output_local
-# TODO: Battery consumption and time HERE
+# Battery consumption and time HERE
+bash get_battery.sh
 ../quickjs/src/qjs atlas.js --file benchmarks/crypto_benchmark/demo.js --local --log output_local
 
 cat output_local
 # Execute atlas using remote mode
 # The output will be written to the output_remote
-# TODO: Battery consumption and time HERE
+# Battery consumption and time HERE
+bash get_battery.sh
 ../quickjs/src/qjs atlas.js --file benchmarks/crypto_benchmark/demo.js --servers 1 --log output_remote
 
 cat output_remote
@@ -257,4 +258,3 @@ cat output_remote
 echo "set_allow_charging true" | nc -q 0 127.0.0.1 8423 
 
 ```
-
