@@ -64,11 +64,9 @@ node client/malicious.js
 
 ls -ll pwned.txt 
 ```
-## Problem analysis
+## Subset Exposition
 
-### Language and Bugs Example
-
-#### Prototype Chain Method Skipping
+### 1. Prototype Chain Method Skipping
 
 Implementation traverses objects but (deliberately, for compat) skips pointers to prototypes
 There is no need for the developer to change the application code for this bug.
@@ -83,9 +81,9 @@ cat problem.js # Code snippet
 node problem.js # Run code snippet
 
 mir-sa problem.js > perm.json  # Run static analysis 
-cat perm.json
+cat perm.json # shows `parseInt`, no `length`, or `split`
 
-mir-da -e perm.json problem.js # Run enforcement 
+mir-da -e perm.json problem.js # Run enforcement — it passes!
 
 # Example 2
 cd ../example2/
@@ -99,7 +97,7 @@ cat perm.json
 mir-da -e perm.json problem.js # Run enforcement 
 ```
 
-### Runtime Metaprogramming
+### 2. Runtime Metaprogramming
 
 Static analysis cannot infer permissions in cases of runtime metaprogramming.
 The developer needs to change one or two lines of code for this bug.
@@ -112,6 +110,7 @@ cat problem.js
 cat main.js
 node main.js
 
+# FIXME: problem.js vs. main.js?!
 mir-sa . > perm.json # Run static analysis
 cat perm.json
 
