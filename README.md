@@ -68,9 +68,10 @@ ls -ll pwned.txt
 
 ### 1. Prototype Chain Method Skipping
 
-Implementation traverses objects but (deliberately, for compat) skips pointers to prototypes
-There is no need for the developer to change the application code for this bug.
+Implementation traverses objects but (deliberately, for compat) skips pointers to prototypes.
+This does not require the developer to change any application code, but will miss some checks; we plan to address this in the future.
 
+Example 1:
 ```sh
 cd problem-analysis
 
@@ -84,7 +85,10 @@ mir-sa problem.js > perm.json  # Run static analysis
 cat perm.json # shows `parseInt`, no `length`, or `split`
 
 mir-da -e perm.json problem.js # Run enforcement — it passes!
+```
 
+Example 2:
+```sh
 # Example 2
 cd ../example2/
 ls  
@@ -100,8 +104,9 @@ mir-da -e perm.json problem.js # Run enforcement
 ### 2. Runtime Metaprogramming
 
 Static analysis cannot infer permissions in cases of runtime metaprogramming.
-The developer needs to change one or two lines of code for this bug.
+To address this, a developer needs to change a few lines of code; but soon, we hope to address this with dynamic analysis.
 
+Example 1, metaprogramming rewriting:
 ```sh
 cd ../../Runtime-Metaprogramming
 ls
@@ -123,7 +128,11 @@ cat main.js
 mir-sa . > perm.json # Run static analysis
 cat perm.json
 mir-da -e main.js -e perm.jsons
+```
 
+Example 2, runtime augmentation:
+
+```sh
 cd ../../example2
 ls
 cat problem.js
@@ -133,13 +142,15 @@ mir-sa problem.js > perm.json # Run static analysis
 cat perm.json
 
 mir-da problem.js -p
+# TODO: Merge the two
 ```
 
-#### Special Built-in
+### 3. Special Built-in
 
 Implementation wraps all primitives with indirection proxies, including special built-in values
-There is no need for the developer to change the application code for this bug.
+There is no need for the developer to change the application code for this bug; they only need to change the system configuration.
 
+Example 1, avoid tracing `Error` via flag (temporary fix):
 ```sh
 cd Special-Built-In/example1
 ls
@@ -152,7 +163,11 @@ cat perm.json
 mir-da problem.js -p # Run dynamic analysis
 mir-da problem.js --prop-exclude 'Error' -p # Remove Error from dynamic analysis
 mir-da problem.js -e perm.json --prop-exclude 'Error' # Run enforcement
+```
 
+Example 2, avoid tracing `undefined` via flag (soon part of default config):
+
+```sh
 cd ../example2
 ls
 cat problem.js
@@ -166,10 +181,12 @@ mir-da problem.js --prop-exclude 'undefined' -p # Remove Error from dynamic anal
 mir-da problem.js -e perm.json --prop-exclude 'undefined' # Run enforcement
 ```
 
-#### Bug: Direct Import Invocation
+### 4. Bug: Direct Import Invocation
 
 Imported function is called directly upon import.
-The developer needs to change two lines of code for this bug.
+The developer needs to change a few lines of code for this bug, in both the importer and the importee.
+This is the most common problem we experienced in porting applications.
+We plan to fix this.
 
 ```sh
 cd Direct-Import-Invocation/example1/problem
