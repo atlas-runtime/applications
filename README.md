@@ -252,6 +252,7 @@ cat output_local
 # Battery consumption and time HERE
 bash get_battery.sh
 ../quickjs/src/qjs atlas.js --file benchmarks/crypto_benchmark/demo.js --servers 1 --log output_remote
+# tell: show that first comm sends the code — hence the largrer size!
 
 cat output_remote
 # Enable charging: 
