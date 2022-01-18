@@ -2,13 +2,16 @@
 
 * [Real Applications](https://docs.google.com/presentation/d/1d9BW1u53wJ3C0A0yLc9Gj96aBgrMEQQgrtHJMVSO_6s/edit#slide=id.p)
 
+TODO:
+* `sudo`
+
 
 # Applications
 
 ## Chat application
 ```sh
 # Number of packages
-ls ~/applications/chat-application/node-chat/node_modules/ -ll | wc -l 
+ls ~/applications/chat-application/node-chat/node_modules/ -l | wc -l 
 
 # get size of JS code — does NOT include tests etc.
 cd applications/chat-application/node-chat/node_modules
@@ -29,11 +32,14 @@ mir-sa . > ../perm.json; cd ..; mir-sa . > perm2.json; jq -s '.[0] * .[1]' perm.
 ../mir-da/index.js -e final.json app.js
 ```
 
+I'll just pause for applause.
+
 ## Demo
 
-A small real world demo with eval and a vulnerability
+Let's see how the tools are supposed to protect against attacks. A small real world demo with eval and a vulnerability.
+
 ```sh
-cd demo
+cd ../../../attack-demo
 cat server.js 
 cat client/benign.js 
 cat client/benign2.js 
@@ -56,11 +62,11 @@ cat node_modules/small-serial/index.js
 mir-sa node_modules/small-serial/index.js | jq
 mir-sa node_modules/small-serial/index.js > perm.json
 
-./mir-da/index.js server.js --module-include /node_modules/small-serial/index.js -e perm.json --prop-exclude 'eval'
+./mir-da/index.js server.js --module-include /node_modules/small-serial/index.js -e perm.json --prop-exclude 'eval' &
 node client/benign.js 
 
-./mir-da/index.js server.js --module-include /node_modules/small-serial/index.js -e perm.json --prop-exclude 'eval'
-node client/malicious.js
+./mir-da/index.js server.js --module-include /node_modules/small-serial/index.js -e perm.json --prop-exclude 'eval' &
+node client/malicious.js # attack shouldn't succeed
 
 ls -ll pwned.txt 
 ```
