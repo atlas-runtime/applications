@@ -62,10 +62,10 @@ cat node_modules/small-serial/index.js
 mir-sa node_modules/small-serial/index.js | jq
 mir-sa node_modules/small-serial/index.js > perm.json
 
-./mir-da/index.js server.js --module-include /node_modules/small-serial/index.js -e perm.json --prop-exclude 'eval' &
+./mir-da/index.js server.js --module-include /node_modules/small-serial/index.js -e perm.json --prop-exclude 'eval'
 node client/benign.js 
 
-./mir-da/index.js server.js --module-include /node_modules/small-serial/index.js -e perm.json --prop-exclude 'eval' &
+./mir-da/index.js server.js --module-include /node_modules/small-serial/index.js -e perm.json --prop-exclude 'eval'
 node client/malicious.js # attack shouldn't succeed
 
 ls -ll pwned.txt 
