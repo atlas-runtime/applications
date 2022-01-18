@@ -118,22 +118,19 @@ cd ../../Runtime-Metaprogramming
 ls
 cd example1/problem
 cat problem.js
-cat main.js
-node main.js
+node problem.js
 
-# FIXME: problem.js vs. main.js?!
 mir-sa . > perm.json # Run static analysis
 cat perm.json
 
-mir-da -e perm.json main.js # Run enforcement
+mir-da -e perm.json problem.js # Run enforcement
 
 cd ../solution
 cat solution.js
-cat main.js
 
 mir-sa . > perm.json # Run static analysis
 cat perm.json
-mir-da -e main.js -e perm.jsons
+mir-da solution.js -e perm.json
 ```
 
 Example 2, runtime augmentation:
