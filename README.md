@@ -3,10 +3,10 @@
 ## Chat application
 ```sh
 # Number of packages
-ls ~/application/chat-application/node-chat/node_modules/ -ll | wc -l 
+ls ~/applications/chat-application/node-chat/node_modules/ -ll | wc -l 
 
 # get size of JS code
-cd application/chat-application/node-chat/node_modules
+cd applications/chat-application/node-chat/node_modules
 find . -name "*.js" -type f | grep -v dist | grep -v build | grep -v test | grep -v node_modules | xargs -n1 wc -l | awk '{print $1}' | paste -sd+ | bc
 
 # go to node-chat dir
