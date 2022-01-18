@@ -1,3 +1,8 @@
+# Overview
+
+* [Real Applications](https://docs.google.com/presentation/d/1d9BW1u53wJ3C0A0yLc9Gj96aBgrMEQQgrtHJMVSO_6s/edit#slide=id.p)
+
+
 # Applications
 
 ## Chat application
@@ -5,7 +10,7 @@
 # Number of packages
 ls ~/applications/chat-application/node-chat/node_modules/ -ll | wc -l 
 
-# get size of JS code
+# get size of JS code — does NOT include tests etc.
 cd applications/chat-application/node-chat/node_modules
 find . -name "*.js" -type f | grep -v dist | grep -v build | grep -v test | grep -v node_modules | xargs -n1 wc -l | awk '{print $1}' | paste -sd+ | bc
 
@@ -13,8 +18,13 @@ find . -name "*.js" -type f | grep -v dist | grep -v build | grep -v test | grep
 cd ~/applications/chat-application/node-chat
 # run the chat app, this will listen on port 3300
 node app.js
+```
 
-# extract the static permissions
+* TODO: Link to the chat app
+
+
+```sh
+# extract the static permissions — from modules and everywhere
 cd node_modules
 mir-sa . > ../perm.json; cd ..; mir-sa . > perm2.json; jq -s '.[0] * .[1]' perm.json perm2.json > final.json; rm perm.json perm2.json
 # enforce the permissions
@@ -197,6 +207,7 @@ cd atlas-demo
 # in a new terminal, open the remote server
 cd atlas-worker
 ./app -p 7000
+# this is the worker receiving remote requests
 ```
 
 ### Connect to the remote PI
@@ -207,10 +218,12 @@ ssh pi2
 
 # after you have connected to the PI
 # To get battery status
+# We query the battery server (API); bunble comes with the battery module
 bash ~/.get_battery.sh
 
 # Disable charging:
 echo "set_allow_charging false" | nc -q 0 127.0.0.1 8423
+# TODO little loop script for using battery (to show consumption)
 
 # Enter the atlas demo folder
 cd atlas-demo/atlas-client
@@ -221,19 +234,22 @@ cat benchmarks/crypto_benchmark/crypto-wrapper.js
 # atlas reads the input from a file called 'input'
 # to generate a file containing 'a' for 1MB
 # Remove .tmp if it exists
-rm -f .tmp
-fallocate -l 1048576 .tmp
+# rm -f .tmp
+# fallocate -l 1048576 .tmp
+# 1MB is sorta limited by SGX memory, and would involve thrashing
 cat .tmp | sed 's/\x0/a/g' > input
 # should show 1MB
 wc -c input
 
 # Execute atlas using local mode
 # The output will be written to the output_local
+# TODO: Battery consumption and time HERE
 ../quickjs/src/qjs atlas.js --file benchmarks/crypto_benchmark/demo.js --local --log output_local
 
 cat output_local
 # Execute atlas using remote mode
 # The output will be written to the output_remote
+# TODO: Battery consumption and time HERE
 ../quickjs/src/qjs atlas.js --file benchmarks/crypto_benchmark/demo.js --servers 1 --log output_remote
 
 cat output_remote
