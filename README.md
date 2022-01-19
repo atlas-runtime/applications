@@ -269,8 +269,10 @@ cat benchmarks/crypto_benchmark/crypto-wrapper.js
 # The output will be written to the output_local
 # Battery consumption.
 bash get_battery.sh
-# This will take about 800s (13 minutes)!
 ../quickjs/src/qjs atlas.js --file benchmarks/crypto_benchmark/demo.js --local --log output_local
+
+# # This will take about 800s (13 minutes)!
+# MOVE BACK TO SLIDES
 
 cat output_local
 # Execute atlas using remote mode
