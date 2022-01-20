@@ -1,0 +1,8 @@
+{
+  "/home/demo/applications/problem-analysis/Special-Built-In/example1/problem.js": {
+    "Error": "rx",
+    "Error.captureStackTrace": "rx",
+    "console": "r",
+    "console.log": "rx"
+  }
+}

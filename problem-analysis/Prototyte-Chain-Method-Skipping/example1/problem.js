@@ -5,7 +5,7 @@
 var str = "data" 
 function data () {
   var k, len, ref, results;
-  ref = str.split(":");
+  ref = str.split(":"); // <--
   results = [];
   for (k = 0, len = ref.length; k < len; k++) {
     part = ref[k];

@@ -7,5 +7,5 @@ request.method = "GET";
 request.headers = "GET /tutorials/other/top-20-mysql-best-practices/ HTTP/1.1"
 
 if (request.method !== 'GET') return false;
-var accept = (request.headers.accept || '').split(/\s*,\s*/);
-return accept.indexOf('text/event-stream') >= 0;
+var accept = (request.headers.accept || '').split(/\s*,\s*/); // <---
+return accept.indexOf('text/event-stream') >= 0; // <--

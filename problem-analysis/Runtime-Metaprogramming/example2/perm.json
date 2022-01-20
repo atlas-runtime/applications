@@ -1,0 +1,10 @@
+{
+  "/home/demo/applications/problem-analysis/Runtime-Metaprogramming/example2/problem.js": {
+    "console": "r",
+    "console.log": "rx",
+    "eval": "rx",
+    "module": "r",
+    "module.exports": "w",
+    "process": "r"
+  }
+}

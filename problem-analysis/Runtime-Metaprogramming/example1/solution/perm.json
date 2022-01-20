@@ -1,0 +1,7 @@
+{
+  "/home/demo/applications/problem-analysis/Runtime-Metaprogramming/example1/solution/solution.js": {
+    "module": "r",
+    "module.exports": "rw",
+    "module.exports.json": "w"
+  }
+}
