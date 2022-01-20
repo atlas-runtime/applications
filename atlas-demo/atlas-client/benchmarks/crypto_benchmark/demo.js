@@ -41,7 +41,11 @@ function generate_traffic(func, ...args) {
 	}, interval);
 }
 
-let cmd = "cat input"
+if (globalThis.opts.input === undefined) {
+	print("Please provide a file input using --input flag")
+	std.exit(0)
+}
+let cmd = "cat " + globalThis.opts.input
 var prog = std.popen(cmd, "r")
 let r = prog.getline().split()
 let key = 'secret key 123'

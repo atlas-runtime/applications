@@ -255,21 +255,15 @@ cd atlas-demo/atlas-client
 # Encrypt & Sign wrapper
 cat benchmarks/crypto_benchmark/crypto-wrapper.js
 
-# atlas reads the input from a file called 'input'
-# to generate a file containing 'a' for 1MB
-# Remove .tmp if it exists
-# rm -f .tmp
-# fallocate -l 1048576 .tmp
-# 1MB is sorta limited by SGX memory, and would involve thrashing
-# cat .tmp | sed 's/\x0/a/g' > input
-# should show 1MB
-# wc -c input
+# atlas reads the input data for this benchmark from --input flag
+# we have pre-generated several inputs in inputs/ folder
+# to run atlas locally using 1MB input do:
 
-# Execute atlas using local mode
+
 # The output will be written to the output_local
 # Battery consumption.
 bash get_battery.sh
-../quickjs/src/qjs atlas.js --file benchmarks/crypto_benchmark/demo.js --local --log output_local
+../quickjs/src/qjs atlas.js --file benchmarks/crypto_benchmark/demo.js --local --log output_local --input inputs/input_1048576
 
 # # This will take about 800s (13 minutes)!
 # MOVE BACK TO SLIDES
@@ -279,7 +273,8 @@ cat output_local
 # The output will be written to the output_remote
 # Battery consumption and time HERE
 bash get_battery.sh
-../quickjs/src/qjs atlas.js --file benchmarks/crypto_benchmark/demo.js --servers 1 --log output_remote
+../quickjs/src/qjs atlas.js --file benchmarks/crypto_benchmark/demo.js --servers 1 --log output_remote 
+--input inputs/input_1048576
 # tell: show that first comm sends the code — hence the largrer size!
 
 cat output_remote
