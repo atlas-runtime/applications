@@ -236,7 +236,6 @@ cd atlas-worker
 ### Connect to the remote PI
 ```sh
 ssh ops5g@cic.aarno-labs.com -p 5011
-pass:wt%'z7P=MU+v$&"-(_j6/$6(#E>z]97-
 ssh pi2
 
 # after you have connected to the PI
