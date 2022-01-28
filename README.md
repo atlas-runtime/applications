@@ -254,14 +254,12 @@ cd atlas-demo/atlas-client
 # Encrypt & Sign wrapper
 cat benchmarks/crypto_benchmark/crypto-wrapper.js
 
-# atlas reads the input data for this benchmark from --input flag
+# atlas reads the input file data for this benchmark from --input flag
 # we have pre-generated several inputs in inputs/ folder
-# to run atlas locally using 1MB input do:
-
-
 # The output will be written to the output_local
 # Battery consumption.
 bash get_battery.sh
+# to run atlas locally using 1MB input do:
 ../quickjs/src/qjs atlas.js --file benchmarks/crypto_benchmark/demo.js --local --log output_local --input inputs/input_1048576
 
 # # This will take about 800s (13 minutes)!
